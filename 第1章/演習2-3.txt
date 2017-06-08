@@ -1,0 +1,29 @@
+演習2-3　ランキング
+
+sql_thor=# update districtproducts2 A
+sql_thor-#
+sql_thor-# set ranking =
+sql_thor-# (
+sql_thor(#
+sql_thor(# select count(B.price) + 1
+sql_thor(#
+sql_thor(# from districtproducts2 B
+sql_thor(#
+sql_thor(# where A.district = B.district
+sql_thor(#
+sql_thor(# AND B.price > A.price);
+UPDATE 11
+sql_thor=# select * from districtproducts2;
+ district |  name  | price | ranking
+----------+--------+-------+---------
+ 東北     | みかん |   100 |       1
+ 東北     | りんご |    50 |       2
+ 東北     | ぶどう |    50 |       2
+ 東北     | レモン |    30 |       4
+ 関東     | レモン |   100 |       1
+ 関東     | パイン |   100 |       1
+ 関東     | りんご |   100 |       1
+ 関東     | ぶどう |    70 |       4
+ 関西     | レモン |    70 |       1
+ 関西     | スイカ |    30 |       2
+ 関西     | りんご |    20 |       3
