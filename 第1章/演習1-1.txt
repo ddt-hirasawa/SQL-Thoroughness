@@ -1,0 +1,60 @@
+演習1-1 case文を使った複数列の最大値の表示
+
+x と y　での最大値
+
+sql_thor=# select
+sql_thor-#
+sql_thor-# key,
+sql_thor-#
+sql_thor-# case when x < y then y
+sql_thor-#
+sql_thor-# else  x
+sql_thor-#
+sql_thor-# end AS greatest
+sql_thor-#
+sql_thor-# from
+sql_thor-#
+sql_thor-# greatests;
+ key | greatest
+-----+----------
+ A   |        2
+ B   |        5
+ C   |        7
+ D   |        3
+
+x  y  z　での最大値
+
+sql_thor=# select
+sql_thor-#
+sql_thor-# key,
+sql_thor-#
+sql_thor-# case when case when x < y
+sql_thor-#
+sql_thor-# then  y
+sql_thor-#
+sql_thor-# else x
+sql_thor-#
+sql_thor-# end < z then z
+sql_thor-#
+sql_thor-# else case when x < y then y else x
+sql_thor-#
+sql_thor-# end
+sql_thor-#
+sql_thor-# end AS greatest
+sql_thor-#
+sql_thor-# from
+sql_thor-#
+sql_thor-# greatests;
+ key | greatest
+-----+----------
+ A   |        3
+ B   |        5
+ C   |        7
+ D   |        8
+
+
+case 
+
+when     ( case when x < y then y else x end )    < z then z
+
+()の中で一つの変数になる
