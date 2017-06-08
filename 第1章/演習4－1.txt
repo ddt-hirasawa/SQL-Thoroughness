@@ -1,0 +1,31 @@
+演習4-1 歯抜けの有り無しを返す問題
+
+sql_thor=# select
+sql_thor-#
+sql_thor-# case
+sql_thor-# when count(*) <> MAX(seq) then 'あり'
+sql_thor-# else 'なし'
+sql_thor-# end AS result
+sql_thor-#
+sql_thor-# from seqTbl;
+ result
+--------
+ なし
+(1 行)
+
+
+sql_thor=# INSERT INTO SeqTbl VALUES(12,'マリー');
+INSERT 0 1
+sql_thor=# select
+sql_thor-#
+sql_thor-# case
+sql_thor-# when count(*) <> MAX(seq) then 'あり'
+sql_thor-# else 'なし'
+sql_thor-# end AS result
+sql_thor-#
+sql_thor-# from seqTbl
+sql_thor-# having count(*) <> MAX(seq);
+ result
+--------
+ あり
+(1 行)
