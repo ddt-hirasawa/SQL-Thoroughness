@@ -1,0 +1,26 @@
+‰‰K1-3 order by ‚Åƒ\[ƒg—ñ‚ğì‚é
+
+select
+
+*
+
+from
+
+greatests
+
+order by
+
+case key
+
+when 'B' then 1
+when 'A' then 2
+when 'D' then 3
+when 'C' then 4
+
+end;
+ key | x | y | z
+-----+---+---+---
+ B   | 5 | 5 | 2
+ A   | 1 | 2 | 3
+ D   | 3 | 3 | 8
+ C   | 4 | 7 | 1
