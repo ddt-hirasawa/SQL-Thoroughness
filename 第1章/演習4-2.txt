@@ -1,0 +1,40 @@
+演習4-2 特性関数の練習
+
+sql_thor=# select dpt from students
+sql_thor-#
+sql_thor-# group by dpt
+sql_thor-#
+sql_thor-# having count(*) = count(
+sql_thor(#
+sql_thor(# case when
+sql_thor(#
+sql_thor(# sbmt_date between '2005-09-01' AND '2005-09-30'
+sql_thor(#
+sql_thor(# then 1 else 0 end
+sql_thor(# )
+sql_thor-# ;
+   dpt
+----------
+ 経済学部
+ 工学部
+ 理学部
+ 文学部
+(4 行)
+
+
+sql_thor=# select dpt from students
+sql_thor-#
+sql_thor-# group by dpt
+sql_thor-#
+sql_thor-# having count(*) = sum(
+sql_thor(#
+sql_thor(# case when
+sql_thor(#
+sql_thor(# sbmt_date between '2005-09-01' AND '2005-09-30'
+sql_thor(#
+sql_thor(# then 1 else 0 end
+sql_thor(# )
+sql_thor-# ;
+   dpt
+----------
+ 経済学部
