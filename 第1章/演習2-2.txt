@@ -1,0 +1,32 @@
+演習2-2 地域ごとのランキング
+
+select 
+district , name,
+
+rank() over(partition by district
+
+order by price ASC) AS ランク
+
+from DistrictProducts;
+
+sql_thor=# select
+sql_thor-# district , name,
+sql_thor-#
+sql_thor-# rank() over(partition by district
+sql_thor(#
+sql_thor(# order by price ASC) AS ランク
+sql_thor-#
+sql_thor-# from DistrictProducts;
+ district |  name  | ランク
+----------+--------+--------
+ 関西     | りんご |      1
+ 関西     | スイカ |      2
+ 関西     | レモン |      3
+ 関東     | ぶどう |      1
+ 関東     | パイン |      2
+ 関東     | レモン |      2
+ 関東     | りんご |      2
+ 東北     | レモン |      1
+ 東北     | ぶどう |      2
+ 東北     | りんご |      2
+ 東北     | みかん |      4
