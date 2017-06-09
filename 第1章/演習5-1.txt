@@ -1,0 +1,38 @@
+演習5-1 結合が先か、集約が先か？
+
+sql_thor=# select
+sql_thor-#
+sql_thor-# MASTER.age_class AS 年齢層,
+sql_thor-#
+sql_thor-# MASTER.sex_cd AS 性別,
+sql_thor-#
+sql_thor-# SUM(CASE WHEN pref_name IN ('青森', '秋田')
+sql_thor(#
+sql_thor(# THEN population ELSE NULL END) AS 東北,
+sql_thor-#
+sql_thor-# SUM(CASE WHEN pref_name IN ('東京', '千葉')
+sql_thor(#
+sql_thor(# THEN population ELSE NULL END) AS 関東
+sql_thor-#
+sql_thor-# FROM (SELECT age_class, sex_cd
+sql_thor(#
+sql_thor(# FROM TblAge CROSS JOIN TblSex) MASTER
+sql_thor-#
+sql_thor-# LEFT OUTER JOIN TblPop DATA
+sql_thor-#
+sql_thor-# ON MASTER.age_class = DATA.age_class
+sql_thor-#
+sql_thor-# AND MASTER.sex_cd = DATA.sex_cd
+sql_thor-#
+sql_thor-# GROUP BY MASTER.age_class, MASTER.sex_cd
+sql_thor-#
+sql_thor-# order by 年齢層 ASC,
+sql_thor-# 東北 ASC;
+ 年齢層 | 性別 | 東北 | 関東
+--------+------+------+------
+ 1      | m    | 1100 | 1800
+ 1      | f    | 1300 | 2500
+ 2      | f    |      |
+ 2      | m    |      |
+ 3      | m    | 1000 |
+ 3      | f    | 1800 | 2100
