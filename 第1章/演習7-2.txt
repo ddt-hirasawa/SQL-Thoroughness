@@ -1,0 +1,42 @@
+‰‰K7-2 Œµ–§‚ÈŠÖŒWœZ
+
+select emp as –¼‘O
+
+from empskills as one
+
+where not exists
+(
+select skill from skills
+
+except
+
+select skill from empskills as two
+
+where one.emp = two.emp
+)
+
+group by emp
+
+having count(*) = (select count(*) from skills);
+
+asd=# select emp as –¼‘O
+asd-#
+asd-# from empskills as one
+asd-#
+asd-# where not exists
+asd-# (
+asd(# select skill from skills
+asd(#
+asd(# except
+asd(#
+asd(# select skill from empskills as two
+asd(#
+asd(# where one.emp = two.emp
+asd(# )
+asd-#
+asd-# group by emp
+asd-#
+asd-# having count(*) = (select count(*) from skills);
+ –¼‘O
+------
+ _è
