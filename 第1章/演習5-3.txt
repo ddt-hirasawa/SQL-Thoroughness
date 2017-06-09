@@ -1,0 +1,26 @@
+演習5-3 merge文を使え -> MYSQL PostgreSQL でサポートされていないので疑似的に行います
+
+update
+
+class_a
+(
+id,
+name
+)
+
+(
+select * from class_b
+
+EXCEPT
+
+select * from class_a
+)
+;
+INSERT 0 1
+sql_thor=# select * from class_a order by id ASC;
+ id |  name
+----+--------
+ 1  | 田中
+ 2  | 鈴木
+ 3  | 伊集院
+ 4  | 西園寺
