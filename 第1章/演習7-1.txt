@@ -1,0 +1,26 @@
+演習7-1 UNIONだけを使うコンペアの改良
+
+select
+
+case
+
+when count(*) = ( select count(*) from tbl_a ) AND 
+     count(*) = ( select count(*) from tbl_b ) then '等しい'
+
+else '異なる' end as 結果
+
+from (select * from tbl_a UNION select * from tbl_b) TMP;
+
+asd=# select
+asd-#
+asd-# case
+asd-#
+asd-# when count(*) = ( select count(*) from tbl_a ) AND
+asd-#      count(*) = ( select count(*) from tbl_b ) then '等しい'
+asd-#
+asd-# else '異なる' end as 結果
+asd-#
+asd-# from (select * from tbl_a UNION select * from tbl_b) TMP;
+  結果
+--------
+ 等しい
