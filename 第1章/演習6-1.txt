@@ -1,0 +1,29 @@
+演習6-1 テキストのサブクエリを1つにせよ
+
+SELECT S1.year, S1.sale,
+
+case sign(sale - (
+
+select sale from sales as s2
+
+where s2.year = s1.year -1) )
+
+when  0 then '→'
+when  1 then '↑'
+when -1 then '↓'
+else '-' end as 矢印
+
+from sales as s1
+
+order by year;
+
+ year | sale | 矢印
+------+------+------
+ 1990 |   50 | -
+ 1991 |   51 | ↑
+ 1992 |   52 | ↑
+ 1993 |   52 | →
+ 1994 |   50 | ↓
+ 1995 |   50 | →
+ 1996 |   49 | ↓
+ 1997 |   55 | ↑
