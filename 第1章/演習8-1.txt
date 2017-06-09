@@ -1,0 +1,21 @@
+演習8-1 配列テーブル
+
+asd=# select distinct key
+asd-#
+asd-# from arraytbl2 as arr1
+asd-#
+asd-# where not exists
+asd-# (
+asd(# select * from arraytbl2 as arr2
+asd(#
+asd(# where arr1.key = arr2.key
+asd(#
+asd(# AND
+asd(#
+asd(# (arr2.val <> 1 or arr2.val is NULL)
+asd(#
+asd(# )
+asd-# ;
+ key
+-----
+ C
