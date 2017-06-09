@@ -1,0 +1,44 @@
+演習6-2 OVERLAPS で期間の重複を調べる
+
+オーバーラップによる
+
+SELECT reserver, start_date, end_date
+
+FROM Reservations R1
+
+WHERE EXISTS
+
+(SELECT *
+
+FROM Reservations R2
+
+WHERE R1.reserver <> R2.reserver
+
+AND (R1.start_date, R1.end_date) OVERLAPS (R2.start_date, R2.end_date));
+ reserver | start_date |  end_date
+----------+------------+------------
+ 内田     | 2006-11-03 | 2006-11-05
+ 山本     | 2006-11-04 | 2006-11-04
+
+Between による
+
+SELECT reserver, start_date, end_date
+
+FROM Reservations R1
+
+WHERE EXISTS
+
+(SELECT *
+
+FROM Reservations R2
+
+WHERE R1.reserver <> R2.reserver
+
+AND ( R1.start_date BETWEEN R2.start_date AND R2.end_date
+
+OR R1.end_date  BETWEEN R2.start_date AND R2.end_date));
+ reserver | start_date |  end_date
+----------+------------+------------
+ 荒木     | 2006-10-28 | 2006-10-31
+ 堀       | 2006-10-31 | 2006-11-01
+ 山本     | 2006-11-04 | 2006-11-04
