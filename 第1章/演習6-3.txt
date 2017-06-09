@@ -1,0 +1,109 @@
+演習6-3 サブクエリの SUM を MAX MIN AVG に変えて動作を確認せよ
+
+SUM の場合 処理金額の累計になる
+加減算により数値が日付ごとに変動することになる
+
+sql_thor=# SELECT prc_date, A1.prc_amt,
+sql_thor-#
+sql_thor-# (SELECT SUM(prc_amt)
+sql_thor(#
+sql_thor(# FROM Accounts A2
+sql_thor(#
+sql_thor(# WHERE A1.prc_date >= A2.prc_date ) AS onhand_amt
+sql_thor-#
+sql_thor-# FROM Accounts A1
+sql_thor-#
+sql_thor-# ORDER BY prc_date;
+  prc_date  | prc_amt | onhand_amt
+------------+---------+------------
+ 2006-10-26 |   12000 |      12000
+ 2006-10-28 |    2500 |      14500
+ 2006-10-31 |  -15000 |       -500
+ 2006-11-03 |   34000 |      33500
+ 2006-11-04 |   -5000 |      28500
+ 2006-11-06 |    7200 |      35700
+ 2006-11-11 |   11000 |      46700
+
+MAX の場合 処理金額の最大値になる
+最大値を記憶して置き、大きい処理金額の場合更新される
+
+sql_thor=# SELECT prc_date, A1.prc_amt,
+sql_thor-#
+sql_thor-# (SELECT MAX(prc_amt)
+sql_thor(#
+sql_thor(# FROM Accounts A2
+sql_thor(#
+sql_thor(# WHERE A1.prc_date >= A2.prc_date ) AS onhand_amt
+sql_thor-#
+sql_thor-# FROM Accounts A1
+sql_thor-#
+sql_thor-# ORDER BY prc_date;
+  prc_date  | prc_amt | onhand_amt
+------------+---------+------------
+ 2006-10-26 |   12000 |      12000
+ 2006-10-28 |    2500 |      12000
+ 2006-10-31 |  -15000 |      12000
+ 2006-11-03 |   34000 |      34000
+ 2006-11-04 |   -5000 |      34000
+ 2006-11-06 |    7200 |      34000
+ 2006-11-11 |   11000 |      34000
+
+MIN の場合 処理金額の最小値になる
+最小値を記憶して置き、小さい処理金額の場合更新される
+
+sql_thor=# SELECT prc_date, A1.prc_amt,
+sql_thor-#
+sql_thor-# (SELECT MIN(prc_amt)
+sql_thor(#
+sql_thor(# FROM Accounts A2
+sql_thor(#
+sql_thor(# WHERE A1.prc_date >= A2.prc_date ) AS onhand_amt
+sql_thor-#
+sql_thor-# FROM Accounts A1
+sql_thor-#
+sql_thor-# ORDER BY prc_date;
+  prc_date  | prc_amt | onhand_amt
+------------+---------+------------
+ 2006-10-26 |   12000 |      12000
+ 2006-10-28 |    2500 |       2500
+ 2006-10-31 |  -15000 |     -15000
+ 2006-11-03 |   34000 |     -15000
+ 2006-11-04 |   -5000 |     -15000
+ 2006-11-06 |    7200 |     -15000
+ 2006-11-11 |   11000 |     -15000
+
+AVG の場合 処理金額の平均値になる
+日付ごとに処理金額を演算し日数で平均を出していく
+
+sql_thor=# SELECT prc_date, A1.prc_amt,
+sql_thor-#
+sql_thor-# (SELECT AVG(prc_amt)
+sql_thor(#
+sql_thor(# FROM Accounts A2
+sql_thor(#
+sql_thor(# WHERE A1.prc_date >= A2.prc_date ) AS onhand_amt
+sql_thor-#
+sql_thor-# FROM Accounts A1
+sql_thor-#
+sql_thor-# ORDER BY prc_date;
+  prc_date  | prc_amt |       onhand_amt
+------------+---------+------------------------
+ 2006-10-26 |   12000 | 12000.0000000000000000
+ 2006-10-28 |    2500 |  7250.0000000000000000
+ 2006-10-31 |  -15000 |  -166.6666666666666667
+ 2006-11-03 |   34000 |  8375.0000000000000000
+ 2006-11-04 |   -5000 |  5700.0000000000000000
+ 2006-11-06 |    7200 |  5950.0000000000000000
+ 2006-11-11 |   11000 |  6671.4285714285714286
+
+SELECT prc_date, A1.prc_amt,
+
+(SELECT AVG(prc_amt)
+
+FROM Accounts A2
+
+WHERE A1.prc_date >= A2.prc_date ) AS onhand_amt
+
+FROM Accounts A1
+
+ORDER BY prc_date;
