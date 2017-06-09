@@ -1,0 +1,20 @@
+演習4-3 バスケット解析の一般化
+
+sql_thor=# select
+sql_thor-#
+sql_thor-# have.shop,
+sql_thor-#
+sql_thor-# count(have.item) AS 店舗の現在庫,
+sql_thor-#
+sql_thor-# (select count(*) from items) - count(have.item) AS 不足数
+sql_thor-#
+sql_thor-# from shopitems AS have,items AS i
+sql_thor-#
+sql_thor-# where have.item = i.item
+sql_thor-#
+sql_thor-# group by have.shop;
+ shop | 店舗の現在庫 | 不足数
+------+--------------+--------
+ 東京 |            3 |      0
+ 仙台 |            3 |      0
+ 大阪 |            2 |      1
