@@ -1,0 +1,17 @@
+‰‰K10-1 having ‚ğg‚Á‚½ˆê”Ê‰»
+
+select center from materials2
+
+group by center
+
+having count(material || orgland) <> COUNT(DISTINCT material || orgland);
+
+asd=# select center from materials2
+asd-#
+asd-# group by center
+asd-#
+asd-# having count(material || orgland) <> COUNT(DISTINCT material || orgland);
+ center
+--------
+ “Œ‹
+(1 s)
