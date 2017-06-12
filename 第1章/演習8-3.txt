@@ -1,0 +1,86 @@
+‰‰K8-3 ‘f”‚ğ‹‚ß‚é
+
+
+ƒe[ƒuƒ‹‚Ìì¬ ®”Œ^•Ï”1‚Â’è‹`
+create table number_test
+(
+digit int8
+)
+
+ƒe[ƒuƒ‹‚É’l‚ğ‘}“ü
+insert into@number_test
+
+(
+digit
+)
+
+(
+0‚©‚ç99‚Ü‚Å‚Ì®”
+select
+
+(d1.digit + d2.digit * 10) AS set
+
+from digits as d1 cross join digits as d1
+
+order by set
+);
+
+select digit AS ‘f”
+
+from number_test d1
+where digit > 1
+and not exists
+(
+select * from number_test as d2
+
+where d2.digit <= d1.digit / 2
+
+and d2.digit <> 1
+
+and mod(d1.digit, d2.digit) = 0)
+
+order by ‘f”;
+
+asd=# select digit AS ‘f”
+asd-#
+asd-# from number_test d1
+asd-# where digit > 1
+asd-# and not exists
+asd-# (
+asd(# select * from number_test as d2
+asd(#
+asd(# where d2.digit <= d1.digit / 2
+asd(#
+asd(# and d2.digit <> 1
+asd(#
+asd(# and mod(d1.digit, d2.digit) = 0)
+asd-#
+asd-# order by ‘f”;
+ ‘f”
+------
+    2
+    3
+    5
+    7
+   11
+   13
+   17
+   19
+   23
+   29
+   31
+   37
+   41
+   43
+   47
+   53
+   59
+   61
+   67
+   71
+   73
+   79
+   83
+   89
+   97
+(25 s)
