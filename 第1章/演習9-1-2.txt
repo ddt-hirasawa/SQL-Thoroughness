@@ -1,0 +1,17 @@
+‰‰K9-1 Œ‡”Ô‚ğ‹‚ß‚é ŠO•”Œ‹‡
+
+asd=# select s1.seq from sequence as s1
+asd-#
+asd-# left outer join seqtbl as s2
+asd-#
+asd-# on s1.seq = s2.seq
+asd-#
+asd-# where s1.seq between 1 and 12
+asd-#
+asd-# and s2.seq is NULL;
+ seq
+-----
+   9
+  10
+   3
+(3 s)
