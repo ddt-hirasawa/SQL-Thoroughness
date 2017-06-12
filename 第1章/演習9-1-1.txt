@@ -1,0 +1,17 @@
+‰‰K9-1 Œ‡”Ô‚ğ‹‚ß‚é not exists
+
+asd=# select seq from sequence
+asd-#
+asd-# where seq between 1 and 12
+asd-#
+asd-# and not exists
+asd-# (
+asd(# select * from seqtbl
+asd(#
+asd(# where sequence.seq = seqtbl.seq);
+ seq
+-----
+   9
+  10
+   3
+(3 s)
